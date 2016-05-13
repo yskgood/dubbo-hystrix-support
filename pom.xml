@@ -4,7 +4,7 @@
 
 	<groupId>com.netease</groupId>
 	<artifactId>dubbo-hystrix-support</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>dubbo-hystrix-support</name>
@@ -69,57 +69,9 @@
 			<version>1.2.17</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.20</version>
-		</dependency>
-		<!--json -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.2.7</version>
-		</dependency>
-
-		<!-- 哨兵监控 -->
-		<dependency>
-			<groupId>com.netease.sentry</groupId>
-			<artifactId>sentry-javaagent-collector</artifactId>
-			<version>0.2.62</version>
-		</dependency>
-
-
-
 	</dependencies>
 	<build>
-		<finalName>medusa</finalName>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>*.xml</include>
-					<include>**/*.properties</include>
-					<include>*.properties</include>
-					<include>**/*.txt</include>
-					<include>*.txt</include>
-					<include>**/*.tld</include>
-					<include>*.tld</include>
-					<include>META-INF/**/*</include>
-					<include>**/*.jar</include>
-				</includes>
-				<excludes>
-					<exclude>filters/**/*</exclude>
-					<exclude>**/.svn/*</exclude>
-				</excludes>
-			</resource>
-			<resource>
-				<directory>src/main/resources/filters/${deploy.env}</directory>
-				<excludes>
-					<exclude>**/.svn/*</exclude>
-				</excludes>
-			</resource>
-		</resources>
+		<finalName>dubbo-hystrix-support</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -155,24 +107,7 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<webResources>
-						<resource>
-							<directory>src/main/webapp/WEB-INF</directory>
-							<targetPath>WEB-INF</targetPath>
-							<filtering>true</filtering>
-							<includes>
-								<include>**/*.xml</include>
-								<include>*.xml</include>
-							</includes>
-						</resource>
-					</webResources>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
+				
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -181,6 +116,7 @@
 					<argLine>-Xmx256m</argLine>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
@@ -191,6 +127,7 @@
 					<xmlOutput>true</xmlOutput>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -209,52 +146,9 @@
 					</additionalConfig>
 				</configuration>
 			</plugin>
+			
 		</plugins>
+		
 	</build>
-	<profiles>
-		<profile>
-			<id>develop</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<deploy.env>develop</deploy.env>
-			</properties>
-		</profile>
-		<profile>
-			<id>test</id>
-			<properties>
-				<deploy.env>test</deploy.env>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>prepare</id>
-			<properties>
-				<deploy.env>prepare</deploy.env>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>production</id>
-			<properties>
-				<deploy.env>production</deploy.env>
-			</properties>
-		</profile>
-
-	</profiles>
-
-	<distributionManagement>
-		<repository>
-			<id>nexus-releases</id>
-			<name>Nexus Release Repository</name>
-			<url>http://223.252.220.134:8081/nexus/content/repositories/releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>nexus-snapshots</id>
-			<name>Nexus Snapshot Repository</name>
-			<url>http://223.252.220.134:8081/nexus/content/repositories/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
-
+	
 </project>
