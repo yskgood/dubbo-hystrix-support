@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  classpath:org/springframework/beans/factory/xml/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context classpath:org/springframework/context/config/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop classpath:org/springframework/aop/config/spring-aop-3.0.xsd
+	http://code.alibabatech.com/schema/dubbo       classpath:META-INF/dubbo.xsd"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo">
+
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="consumer-of-helloworld-app" />
+
+	<dubbo:consumer>
+		<dubbo:parameter key="ThreadPoolCoreSize" value="3" />
+	</dubbo:consumer>
+
+	<!-- 使用multicast广播注册中心暴露服务地址 -->
+	<dubbo:registry address="zookeeper://127.0.0.1:2181" />
+
+	<!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
+	<dubbo:reference id="helloService"
+		interface="com.netease.dubbo.service.HelloService">
+	</dubbo:reference>
+
+</beans>
