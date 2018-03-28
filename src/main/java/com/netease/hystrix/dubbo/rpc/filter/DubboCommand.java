@@ -41,6 +41,7 @@ public class DubboCommand extends HystrixCommand<Result> {
 
     @Override
     protected Result getFallback() {
+
         if (StringUtils.isEmpty(fallbackName)) {
             //抛出原本的异常
             return super.getFallback();
