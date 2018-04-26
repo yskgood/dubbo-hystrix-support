@@ -30,7 +30,7 @@ public class SetterFactory {
         //线程池按class进行划分，一个class可以理解为一个领域服务，熔断保护按方法维度提供
         return HystrixCommand.Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey(interfaceName))
                 .andCommandKey(HystrixCommandKey.Factory.asKey(methodName))
-                .andCommandPropertiesDefaults(HystrixCommandPropertiesFactory.create(url))
+                .andCommandPropertiesDefaults(HystrixCommandPropertiesFactory.create(url, methodName))
                 .andThreadPoolPropertiesDefaults(HystrixThreadPoolPropertiesFactory.create(url));
     }
 

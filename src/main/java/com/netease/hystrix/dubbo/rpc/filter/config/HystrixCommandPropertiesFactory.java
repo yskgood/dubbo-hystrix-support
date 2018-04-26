@@ -9,11 +9,11 @@ import com.netflix.hystrix.HystrixCommandProperties;
  */
 public class HystrixCommandPropertiesFactory {
 
-    public static HystrixCommandProperties.Setter create(URL url) {
-        return HystrixCommandProperties.Setter().withCircuitBreakerSleepWindowInMilliseconds(url.getParameter("sleepWindowInMilliseconds", 5000))
-                .withCircuitBreakerErrorThresholdPercentage(url.getParameter("errorThresholdPercentage", 50))
-                .withCircuitBreakerRequestVolumeThreshold(url.getParameter("requestVolumeThreshold", 20))
+    public static HystrixCommandProperties.Setter create(URL url, String method) {
+        return HystrixCommandProperties.Setter().withCircuitBreakerSleepWindowInMilliseconds(url.getMethodParameter(method, "sleepWindowInMilliseconds", 5000))
+                .withCircuitBreakerErrorThresholdPercentage(url.getMethodParameter(method, "errorThresholdPercentage", 50))
+                .withCircuitBreakerRequestVolumeThreshold(url.getMethodParameter(method, "requestVolumeThreshold", 20))
                 .withExecutionIsolationThreadInterruptOnTimeout(true)
-                .withExecutionTimeoutInMilliseconds(url.getParameter("timeoutInMilliseconds", 1000));
+                .withExecutionTimeoutInMilliseconds(url.getMethodParameter(method, "timeoutInMilliseconds", 1000));
     }
 }
