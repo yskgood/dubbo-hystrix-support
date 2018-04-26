@@ -15,6 +15,7 @@ public class HystrixCommandPropertiesFactory {
                 .withCircuitBreakerRequestVolumeThreshold(url.getMethodParameter(method, "requestVolumeThreshold", 20))
                 .withExecutionIsolationThreadInterruptOnTimeout(true)
                 .withExecutionTimeoutInMilliseconds(url.getMethodParameter(method, "timeoutInMilliseconds", 1000))
+                .withFallbackIsolationSemaphoreMaxConcurrentRequests(url.getMethodParameter(method, "fallbackMaxConcurrentRequests", 50))
                 .withExecutionIsolationStrategy(IsolationStrategy.getIsolationStrategy(url))
                 .withExecutionIsolationSemaphoreMaxConcurrentRequests(url.getMethodParameter(method, "maxConcurrentRequests", 10));
 
